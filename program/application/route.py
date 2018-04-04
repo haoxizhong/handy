@@ -101,7 +101,7 @@ def gen(gameid, action_list, state, opt):
         elif opt == -3:
             info = "平局了"
         elif opt == -4:
-            info = "你认输了"
+            info = "你认为平局了"
         else:
             info = "出现了错误"
 
@@ -153,10 +153,14 @@ def human_agent():
         return "gg"
     else:
         gameid = request.args["gameid"]
-
-        state = human_queue[gameid].get()
         # print("get", state)
-        l1, r1, l2, r2, turn = state
+
+        if "pingju" in request.args:
+            l1 = -4
+            state = (-4, -4, -4, -4, -4)
+        else:
+            state = human_queue[gameid].get()
+            l1, r1, l2, r2, turn = state
         if l1 < 0:
             return gen(gameid, [], state, l1)
 
