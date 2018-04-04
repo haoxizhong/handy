@@ -39,6 +39,7 @@ def gamer(gameid, fb, method, mod):
         print("human vs %s" % method, file=f)
     else:
         print("%s vs human" % method, file=f)
+    print("Mod %d" % mod, file=f)
 
     agent = generate_agent(method)(k, mod)
     step_limit = 75
