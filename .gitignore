@@ -4,3 +4,4 @@ paper
 *.swp
 program/result
 *.pyc
+*~
