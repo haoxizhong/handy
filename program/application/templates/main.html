@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.bilibili.com">
+<head>
+    <meta charset="UTF-8">
+    <title>碰数游戏</title>
+</head>
+<body>
+<h1>碰数游戏</h1>
+<form method="get">
+    <input id="fb0" type="radio" value="0" name="fb" checked>先手</input>
+    <input id="fb1" type="radio" value="1" name="fb">后手</input> <br>
+    <br> 你想要挑战的选手 <br>
+    <input id="method0" type="radio" value="smart" name="method" checked>聪明策略 Smart</input> <br>
+    <input id="method1" type="radio" value="random" name="method">随机策略 Random</input> <br>
+    <input id="method2" type="radio" value="max" name="method">最大策略 Max</input> <br>
+    <input id="method3" type="radio" value="option" name="method">优先级策略 Optional</input> <br>
+    <input id="method4" type="radio" value="mcts" name="method">搜索策略 MCTS</input> <br>
+    <br> 游戏模式 <br>
+    <input id="mod1" type="radio" value="1" name="mod" checked>可以出现重复状态的模式</input> <br>
+    <input id="mod2" type="radio" value="2" name="mod">无重复状态模式</input> <br>
+    <br>
+    <input type="submit" value="开打">
+</form>
+</body>
+</html>
