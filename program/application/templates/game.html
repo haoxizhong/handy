@@ -52,13 +52,15 @@
                endif %} {% if
                not(able[1][1]) %} disabled {% endif %}>右手碰对方右手</input><br>
 
-        <input type="submit" value="碰！" style="width: 100px;height: 60px" {% if not(action_able) %} disabled {% endif %}>
+        <input type="submit" value="碰！" style="width: 100px;height: 60px" {% if not(action_able) %} disabled {% endif
+               %}>
     </form>
 
     <form method="get">
         <input type="hidden" value="{{gameid}}" name="gameid">
         <input type="hidden" value="1" name="pingju">
-        <input type="submit" value="平局了" style="width: 100px;height: 60px" {% if not(action_able) %} disabled {% endif %}>
+        {% if mod==1 %} <input type="submit" value="平局了" style="width: 100px;height: 60px" {% if not(action_able) %}
+                               disabled {% endif %}> {% endif %}
     </form>
 </font>
 </body>

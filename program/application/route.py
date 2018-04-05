@@ -109,7 +109,7 @@ def gen(gameid, action_list, state, opt):
         human_queue[gameid].put((opt, opt, opt, opt, opt))
 
         return render_template("game.html", gameid=gameid, able=able, inf=info, action_able=False,
-                               state=state, check=check)
+                               state=state, check=check, mod=mod_list[gameid])
 
     for op1, op2 in action_list:
         able[op1][op2] = True
@@ -124,7 +124,7 @@ def gen(gameid, action_list, state, opt):
         check[1][1] = True
 
     return render_template("game.html", gameid=gameid, able=able, inf="", action_able=True, state=state,
-                           check=check)
+                           check=check, mod=mod_list[gameid])
 
 
 @app.route("/getaction")
