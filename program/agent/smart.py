@@ -27,7 +27,7 @@ class SmartAgent2(BasicAgent):
         print("next", self.next[x])
         print("pre", self.pre[x])
 
-    def dfs(self, s, dic, dep):
+    def dfs(self, s, dic, dep, q):
         if s in self.next_cnt.keys():
             return self.next_cnt[s]
 
@@ -52,12 +52,14 @@ class SmartAgent2(BasicAgent):
             able = [False, False]
             able[0] = result[0] > 0 or result[1] > 1
             able[1] = result[1] > 0
-            self.next_cnt[s] = able
+            self.next_cnt[s] = [able[0], able[1]]
+            q.put(s)
+            self.f[s] = False
             return able
         elif cnt == 1:
-            able = self.dfs(ns, dic, dep + 1)
+            able = self.dfs(ns, dic, dep + 1, q)
             able[0], able[1] = able[1], able[0]
-            self.next_cnt[s] = able
+            self.next_cnt[s] = [able[0], able[1]]
             return able
         else:
             return [False, False]
@@ -118,24 +120,33 @@ class SmartAgent2(BasicAgent):
                                     q.put((a, b, c, d, e))
 
         while q.qsize() != 0:
-            now = q.get()
-            for x in self.pre[now]:
-                self.out_cnt[x] -= 1
-                if self.f[x] is None and (self.out_cnt[x] == 0 or self.f[now] == False):
-                    if self.f[now] == False:
-                        self.f[x] = True
-                    else:
-                        self.f[x] = False
-                    q.put(x)
+            while q.qsize() != 0:
+                now = q.get()
+                for x in self.pre[now]:
+                    self.out_cnt[x] -= 1
+                    if self.f[x] is None and (self.out_cnt[x] == 0 or self.f[now] == False):
+                        if self.f[now] == False:
+                            self.f[x] = True
+                        else:
+                            self.f[x] = False
+                        q.put(x)
 
-        for a in range(0, k):
-            for b in range(0, k):
-                for c in range(0, k):
-                    for d in range(0, k):
-                        for e in range(0, 2):
-                            s = (a, b, c, d, e)
-                            if self.f[s] is None and not (s in self.next_cnt.keys()):
-                                self.dfs(s, {}, 0)
+            aq = queue.Queue()
+            aq.put((1, 1, 1, 1, 0))
+            se = set()
+            se.add((1, 1, 1, 1, 0))
+            self.next_cnt = {}
+
+            while aq.qsize() != 0:
+                now = aq.get()
+                if self.f[now] is None and not (now in self.next_cnt.keys()):
+                    self.dfs(now, {}, 0, q)
+                for s in self.next[now]:
+                    if self.f[s] is None and not (s in se):
+                        aq.put(s)
+                        se.add(s)
+
+        # pdb.set_trace()
 
     def reinit(self):
         pass
