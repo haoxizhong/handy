@@ -31,7 +31,7 @@ def play_game(agent1, agent2, k, mod, deb):
     step = 0
 
     se = set()
-    step_limit = k*k*k*k
+    step_limit = k*k*k
 
     while not (end(l1, r1, l2, r2)) and step < step_limit:
         se.add((l1, r1, l2, r2, turn))
