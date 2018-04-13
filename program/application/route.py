@@ -1,5 +1,5 @@
 from . import app
-from flask import request, render_template, redirect, url_for
+from flask import request, render_template, redirect, url_for, send_from_directory
 import uuid
 import threading
 from agent import SmartAgent, RandomAgent, MaxAgent, OptionalAgent, MCTSAgent
@@ -206,3 +206,9 @@ def main():
         uid = start_game(fb, method, mod)
 
         return redirect(url_for("human_agent", gameid=uid))
+
+@app.route('/static/<path:filetype>/<path:filename>')
+def serve_static(filetype, filename):
+    root_dir = os.path.dirname(os.getcwd())
+    return send_from_directory(os.path.join(  'static', filetype),
+                               filename)

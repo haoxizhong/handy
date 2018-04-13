@@ -3,25 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <title>碰数游戏</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/awesome-bootstrap-checkbox.css">
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
 </head>
 <body>
-<h1>碰数游戏</h1>
-<font size="18">
+<div class="container-fluid">
+    <h1>碰数游戏</h1>
+    <h2>游戏规则</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <p>
+                碰数游戏是双方各有两只手，每次选择一只自己的手去触碰对方的手，并将自己手的数字变成相碰两只手的数字之和对10取模，谁首先把自己两只手都变成0就获胜的游戏。<br>
+                不能用自己已经为0的手去碰对方的手，也不能碰对方为0的手。<br>
+                在无重复状态游戏模式中，增加了要求是不能出现重复的状态，比如当前你左手为1右手为2对手左右手分别为3、4，那么不允许之后通过某种操作又变成你左右时为1、2对手为3、4,的情况。如果任何一种方法都会导致出现重复的状况，则直接失败。<br>
+                在第一种模式中可能会有平局的出现，<b>但请在确认一定平局时再点击平局按钮。</b><br>
+                在游戏开始后，<b>请务必将游戏进行到游戏结束为止。</b>
+            </p>
+        </div>
+    </div>
     <form method="get">
-        <label><input id="fb0" type="radio" value="0" name="fb" style="width: 50px;height: 50px" checked>先手</label>
-        <label><input id="fb1" type="radio" value="1" name="fb" style="width: 50px;height: 50px">后手 <br></label>
-        <br> 你想要挑战的选手 <br>
-        <label><input id="method0" type="radio" value="smart" name="method" style="width: 50px;height: 50px" checked>聪明策略 Smart</label> <br>
-        <label><input id="method1" type="radio" value="random" name="method" style="width: 50px;height: 50px">随机策略 Random</label> <br>
-        <label><input id="method2" type="radio" value="max" name="method" style="width: 50px;height: 50px">最大策略 Max</label> <br>
-        <label><input id="method3" type="radio" value="option" name="method" style="width: 50px;height: 50px">优先级策略 Optional</label> <br>
-        <label><input id="method4" type="radio" value="mcts" name="method" style="width: 50px;height: 50px">搜索策略 MCTS</label> <br>
-        <br> 游戏模式 <br>
-        <label><input id="mod1" type="radio" value="1" name="mod" style="width: 50px;height: 50px" checked>可以出现重复状态的模式</label> <br>
-        <label><input id="mod2" type="radio" value="2" name="mod" style="width: 50px;height: 50px">无重复状态模式</label> <br>
-        <br>
-        <input type="submit" value="开打" style="width: 100px;height: 60px">
+        <div class="form-group">
+            <h5>你想要先手还是后手</h5>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="radio radio-info radio-inline">
+                        <input id="fb0" type="radio" value="0" name="fb" checked>
+                        <label for="fb0">
+                            先手
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="radio radio-info radio-inline">
+                        <input id="fb1" type="radio" value="1" name="fb">
+                        <label for="fb1">
+                            后手
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <h5>你想要挑战的选手</h5>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="radio">
+                            <input id="method0" type="radio" value="smart" name="method" checked>
+                        <label for="method0">
+                            聪明策略 Smart
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="radio">
+                            <input id="method1" type="radio" value="random" name="method">
+                        <label for="method1">
+                            随机策略 Random
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="radio">
+                            <input id="method2" type="radio" value="max" name="method">
+                        <label for="method2">
+                            最大策略 Max
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="radio">
+                            <input id="method3" type="radio" value="option" name="method">
+                        <label for="method3">
+                            优先级策略 Optional
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="radio">
+                            <input id="method4" type="radio" value="mcts" name="method">
+                        <label for="method4">
+                            搜索策略 MCTS
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <h5>游戏模式</h5>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="radio radio-danger">
+                            <input id="mod1" type="radio" value="1" name="mod" checked>
+                        <label for="mod1">
+                            可以出现重复状态的模式
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="radio radio-danger">
+                            <input id="mod2" type="radio" value="2" name="mod">
+                        <label for="mod2">
+                            无重复状态模式
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">开打</button>
+        </div>
     </form>
-</font>
+
+
+</div>
 </body>
 </html>

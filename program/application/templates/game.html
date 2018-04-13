@@ -1,18 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.bilibili.com">
 <head>
     <meta charset="UTF-8">
     <title>{{gameid}}</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/awesome-bootstrap-checkbox.css">
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
 </head>
 <body>
-<h1>碰数游戏</h1>
-{% if inf != "" %} <h2>{{inf}}</h2>
-<form method="get" action="/">
-    <input type="submit" value="点此返回" style="width: 100px;height: 60px">
-</form>
-{% endif %}
-<font size="18">
-    <table border="1">
+<div class="container-fluid">
+    <h1>碰数游戏</h1>
+    {% if inf != "" %}
+    <h2>{{inf}}</h2>
+    <form method="get" action="/">
+        <div class="form-group">
+            <button type="submit" class="btn btn-default">
+                返回首页
+            </button>
+        </div>
+    </form>
+    {% endif %}
+    <table border="1" class="table">
         <tr>
             <th></th>
             <th>左手</th>
@@ -29,39 +38,70 @@
             <td>{{state[(1-state[4])*2+1]}}</td>
         </tr>
     </table>
-
     <form method="get" action="/getaction">
-        <input type="hidden" value="{{gameid}}" name="gameid">
-        <input type="hidden" value="{{state}}" name="state">
-        你用<br>
+        <div class="form-group">
+            <input type="hidden" value="{{gameid}}" name="gameid">
+            <input type="hidden" value="{{state}}" name="state">
+            <h5>你用</h5>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="radio radio-danger">
+                        <input id="op00" type="radio" value="0" name="op"
+                               {% if check[0][0] %} checked {% endif %} {% if not(able[0][0]) %} disabled {% endif %}>
+                        <label for="op00">
+                            左手碰对方左手
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="radio radio-danger">
+                        <input id="op01" type="radio" value="1" name="op"
+                               {% if check[0][1] %} checked {% endif %} {% if not(able[0][1]) %} disabled {% endif %}>
+                        <label for="op01">
+                            左手碰对方右手
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4">
+                    <div class="radio radio-danger">
+                        <input id="op10" type="radio" value="2" name="op"
+                               {% if check[1][0] %} checked {% endif %} {% if not(able[1][0]) %} disabled {% endif %}>
+                        <label for="op10">
+                            右手碰对方左手
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="radio radio-danger">
+                        <input id="op11" type="radio" value="3" name="op"
+                               {% if check[1][1] %} checked {% endif %} {% if not(able[1][1]) %} disabled {% endif %}>
+                        <label for="op11">
+                            右手碰对方右手
+                        </label>
+                    </div>
+                </div>
+            </div>
 
-        <label><input id="op00" type="radio" value="0" name="op" style="width: 50px;height: 50px" {% if check[0][0] %} checked
-               {%
-               endif %} {% if
-               not(able[0][0]) %} disabled {% endif %}>左手碰对方左手</label><br>
-        <label><input id="op01" type="radio" value="1" name="op" style="width: 50px;height: 50px" {% if check[0][1] %} checked
-               {%
-               endif %} {% if
-               not(able[0][1]) %} disabled {% endif %}>左手碰对方右手</label><br>
-        <label><input id="op10" type="radio" value="2" name="op" style="width: 50px;height: 50px" {% if check[1][0] %} checked
-               {%
-               endif %} {% if
-               not(able[1][0]) %} disabled {% endif %}>右手碰对方左手</label><br>
-        <label><input id="op11" type="radio" value="3" name="op" style="width: 50px;height: 50px" {% if check[1][1] %} checked
-               {%
-               endif %} {% if
-               not(able[1][1]) %} disabled {% endif %}>右手碰对方右手</label><br>
+            <button type="submit" class="btn btn-primary" {% if not(action_able) %} disabled {% endif %}>
+                碰！
+            </button>
 
-        <input type="submit" value="碰！" style="width: 100px;height: 60px" {% if not(action_able) %} disabled {% endif
-               %}>
+        </div>
     </form>
 
     <form method="get">
-        <input type="hidden" value="{{gameid}}" name="gameid">
-        <input type="hidden" value="1" name="pingju">
-        {% if mod==1 %} <input type="submit" value="平局了" style="width: 100px;height: 60px" {% if not(action_able) %}
-                               disabled {% endif %}> {% endif %}
+        <div class="form-group">
+            <input type="hidden" value="{{gameid}}" name="gameid">
+            <input type="hidden" value="1" name="pingju">
+            {% if mod==1 %}
+            <button type="submit" class="btn btn-primary" {% if not(action_able) %} disabled {% endif %}>
+                平局了
+            </button>
+            {% endif %}
+        </div>
     </form>
-</font>
+</div>
 </body>
 </html>
