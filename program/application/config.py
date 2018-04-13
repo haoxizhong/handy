@@ -3,4 +3,4 @@ PORT = 10086
 DEBUG = False
 
 RESULT_DIR = "result"
-
+WORK_DIR = "ap"
