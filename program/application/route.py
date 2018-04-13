@@ -99,6 +99,9 @@ def gen(gameid, action_list, state, opt):
             info = "你赢了"
         elif opt == -2:
             info = "你输了"
+        elif opt == -7:
+            info = "你输了，因为再移动会到重复状态了"
+            opt = -2
         elif opt == -3:
             info = "平局了"
         elif opt == -4:
@@ -169,7 +172,7 @@ def human_agent():
         if len(action_list) == 0:
             agent_queue[gameid].put((-2, -2, -2, -2, -2))
 
-            return gen(gameid, [], state, -2)
+            return gen(gameid, [], state, -7)
 
         return gen(gameid, action_list, state, 0)
 
