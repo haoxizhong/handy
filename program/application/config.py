@@ -1,5 +1,5 @@
-HOST = 'localhost'
-PORT = 8000
+HOST = '121.42.148.169'
+PORT = 10086
 DEBUG = False
 
 RESULT_DIR = "result"
