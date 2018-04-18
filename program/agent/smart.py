@@ -125,7 +125,7 @@ class SmartAgent2(BasicAgent):
                 for x in self.pre[now]:
                     self.out_cnt[x] -= 1
                     if self.f[x] is None and (self.out_cnt[x] == 0 or self.f[now] == False):
-                        if self.f[now] == False:
+                        if not self.f[now]:
                             self.f[x] = True
                         else:
                             self.f[x] = False
