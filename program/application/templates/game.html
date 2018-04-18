@@ -22,23 +22,69 @@
         </div>
     </form>
     {% endif %}
-    <table border="1" class="table">
-        <tr>
-            <th></th>
-            <th>左手</th>
-            <th>右手</th>
-        </tr>
-        <tr>
-            <td>你</td>
-            <td>{{state[state[4]*2]}}</td>
-            <td>{{state[state[4]*2+1]}}</td>
-        </tr>
-        <tr>
-            <td>对手</td>
-            <td>{{state[(1-state[4])*2]}}</td>
-            <td>{{state[(1-state[4])*2+1]}}</td>
-        </tr>
-    </table>
+    <div class="row">
+        {% if state3 != "" %}
+        <div class="col-md-4">
+            <table border="1" class="table">
+                <tr>
+                    <th>你从这个表格移动到下个表格</th>
+                    <th>左手</th>
+                    <th>右手</th>
+                </tr>
+                <tr>
+                    <td>你</td>
+                    <td>{{state3[state3[4]*2]}}</td>
+                    <td>{{state3[state3[4]*2+1]}}</td>
+                </tr>
+                <tr>
+                    <td>对手</td>
+                    <td>{{state3[(1-state3[4])*2]}}</td>
+                    <td>{{state3[(1-state3[4])*2+1]}}</td>
+                </tr>
+            </table>
+        </div>
+        {% endif %}
+        {% if state2 != "" %}
+        <div class="col-md-4">
+            <table border="1" class="table">
+                <tr>
+                    <th>电脑从这个表格移动到下个表格</th>
+                    <th>左手</th>
+                    <th>右手</th>
+                </tr>
+                <tr>
+                    <td>你</td>
+                    <td>{{state2[state[4]*2]}}</td>
+                    <td>{{state2[state[4]*2+1]}}</td>
+                </tr>
+                <tr>
+                    <td>对手</td>
+                    <td>{{state2[(1-state[4])*2]}}</td>
+                    <td>{{state2[(1-state[4])*2+1]}}</td>
+                </tr>
+            </table>
+        </div>
+        {% endif %}
+        <div class="col-md-4">
+            <table border="1" class="table">
+                <tr>
+                    <th>现在该你从这里动</th>
+                    <th>左手</th>
+                    <th>右手</th>
+                </tr>
+                <tr>
+                    <td>你</td>
+                    <td>{{state[state[4]*2]}}</td>
+                    <td>{{state[state[4]*2+1]}}</td>
+                </tr>
+                <tr>
+                    <td>对手</td>
+                    <td>{{state[(1-state[4])*2]}}</td>
+                    <td>{{state[(1-state[4])*2+1]}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
     <form method="get" action="/getaction">
         <div class="form-group">
             <input type="hidden" value="{{gameid}}" name="gameid">
