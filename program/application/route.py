@@ -58,13 +58,14 @@ def gamer(game_id, fb, method, mod):
         if l % 2 != game_list[game_id]["turn"]:
             wait_second += 1
             if wait_second > max_wait_second:
-                game_list[game_id].append((-6, -6, -6, -6, -6))
+                game_list[game_id]["history"].append((-6, -6, -6, -6, -6))
                 print("human leaves, game ends", file=f)
                 break
             time.sleep(1)
             continue
 
         state = game_list[game_id]["history"][-1]
+        wait_second = 0
 
         if state[0] == -4:
             print("human grant lose, game ends", file=f)
@@ -81,7 +82,7 @@ def gamer(game_id, fb, method, mod):
         action_list = generate_available_action(k, l1, r1, l2, r2, turn, game_list[game_id]["set"], mod)
 
         if len(action_list) == 0 or end(l1, r1, l2, r2):
-            game_list[game_id].append((-1, -1, -1, -1, -1))
+            game_list[game_id]["history"].append((-1, -1, -1, -1, -1))
             print("machine loses,game ends", file=f)
             break
 
