@@ -63,6 +63,8 @@ def gamer(game_id, fb, method, mod):
                 break
             time.sleep(1)
             continue
+        
+        print("from machine",game_list[game_id]["history"])
 
         state = game_list[game_id]["history"][-1]
         wait_second = 0
@@ -70,7 +72,7 @@ def gamer(game_id, fb, method, mod):
         if state[0] == -4:
             print("human grant lose, game ends", file=f)
             break
-        if state[0] == -2:
+        if state[0] == -2 or state[0] == -7:
             print("human loses, game ends", file=f)
             break
 
@@ -230,12 +232,15 @@ def human_agent():
                 break
 
             if step != len(game_list[game_id]["history"]):
+                #print(step,len(game_list[game_id]["history"]))
                 continue
 
             if len(game_list[game_id]["history"]) % 2 == game_list[game_id]["turn"]:
                 continue
 
             break
+        print("from human",game_list[game_id]["history"])
+        state = game_list[game_id]["history"][-1]
 
         if state[0] < 0:
             return gen(game_id, [], state)
