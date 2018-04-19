@@ -119,6 +119,8 @@ def action():
     op1 = int(request.args["op"]) // 2
     op2 = int(request.args["op"]) % 2
     game_id = request.args["gameid"]
+    if game_list[game_id]["history"][-1][0] < 0:
+        return redirect(url_for("human_agent", gameid=game_id, step=len(game_list[game_id]["history"])))
 
     state = request.args["state"].replace("(", "").replace(")", "").replace(" ", "").split(",")
     l1 = int(state[0])
@@ -205,9 +207,8 @@ def gen(game_id, action_list, state):
 
 @app.route("/game")
 def human_agent():
-    print(request.args)
-    if not ("gameid" in request.args):
-        return "game not exists"
+    if not ("gameid" in request.args) or not (request.args["gameid"] in game_list.keys()):
+        return redirect(url_for("main"))
     else:
         game_id = request.args["gameid"]
         if not ("step" in request.args):
