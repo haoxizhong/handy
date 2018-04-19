@@ -240,7 +240,8 @@ def human_agent():
 
             break
         print("from human",game_list[game_id]["history"])
-        state = game_list[game_id]["history"][-1]
+        if state[0] >= 0:
+            state = game_list[game_id]["history"][-1]
 
         if state[0] < 0:
             return gen(game_id, [], state)
