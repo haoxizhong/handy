@@ -162,6 +162,8 @@ def gen(game_id, action_list, state):
 
         if opt == -1:
             info = "机器无路可走，你已冠绝群雄，取得胜利"
+            state = state2
+            state2 = ""
         elif opt == -2:
             info = "机器不可战胜，你已经输了"
         elif opt == -3:
